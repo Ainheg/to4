@@ -1,0 +1,16 @@
+
+(to/test_app.story)
+Scenario: Klient loguje się w bankomacie (poprawny PIN)
+Given bankomat
+And karta w bankomacie
+When wprowadzę poprawny PIN
+Then powinienem być zalogowany w bankomacie
+
+Scenario: Klient loguje się w bankomacie (niepoprawny PIN)
+Given bankomat
+And karta w bankomacie
+When wprowadzę niepoprawny PIN
+Then nie powinienem być zalogowany w bankomacie
+And karta nie powinna być w bankomacie
+
+

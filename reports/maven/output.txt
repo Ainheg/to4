@@ -1,0 +1,72 @@
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running to.AppTest
+Processing system properties {}
+Using controls EmbedderControls[batch=false,skip=false,generateViewAfterStories=true,ignoreFailureInStories=false,ignoreFailureInView=false,verboseFailures=false,verboseFiltering=false,storyTimeouts=300,threads=1,failOnStoryTimeout=false]
+
+(BeforeStories)
+
+Running story to/app_test.story
+
+(to/app_test.story)
+Scenario: Klient zakłada nowe konto (nieletni)
+Given bank
+And klient ma 16 lat
+When klient składa wniosek o założenie konta
+Then konto nie powinno zostać stworzone
+
+Scenario: Klient zakłada nowe konto (pełnoletni)
+Given bank
+And klient ma 20 lat
+When klient składa wniosek o założenie konta
+Then konto powinno zostać stowrzone
+
+Scenario: Klient loguje się w bankomacie (poprawny PIN)
+Given bankomat
+And karta w bankomacie
+When klient wprowadzi poprawny PIN
+Then klient powinien być zalogowany w bankomacie
+
+Scenario: Klient loguje się w bankomacie (niepoprawny PIN)
+Given bankomat
+And karta w bankomacie
+When klient wprowadzi niepoprawny PIN
+Then klient nie powinien być zalogowany w bankomacie
+And karta nie powinna być w bankomacie
+
+Scenario: Klient wypłaca gotówkę z bankomatu
+Given bankomat
+And klient jest zalogowany w bankomacie
+And saldo bankomatu wynosi 500 złotych
+And saldo konta klienta wynosi 100 złotych
+When klient wypłaci 50 złotych
+Then saldo konta klienta powinno wynosić 50 złotych
+And saldo bankomatu powinno wynosić 450 złotych
+
+Scenario: Klient wpłaca gotówkę do bankomatu
+Given bankomat
+And klient jest zalogowany w bankomacie
+And saldo bankomatu wynosi 500 złotych
+And saldo konta klienta wynosi 100 złotych
+When klient wpłaci 50 złotych
+Then saldo konta klienta powinno wynosić 150 złotych
+And saldo bankomatu powinno wynosić 550 złotych
+
+
+
+(AfterStories)
+
+Generating reports view to '/media/zdroid/Data/Repositories/to4/to/target/jbehave' using formats '[stats, console, txt, junitscenarioreporter]' and view properties '{reports=ftl/jbehave-reports.ftl, nonDecorated=ftl/jbehave-report-non-decorated.ftl, maps=ftl/jbehave-maps.ftl, navigator=ftl/jbehave-navigator.ftl, views=ftl/jbehave-views.ftl, decorated=ftl/jbehave-report-decorated.ftl}'
+Reports view generated with 3 stories (of which 0 pending) containing 8 scenarios (of which 0 pending)
+[INFO] Tests run: 40, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.979 s - in to.AppTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 40, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.530 s
+[INFO] Finished at: 2021-01-11T14:42:32+01:00
+[INFO] ------------------------------------------------------------------------
