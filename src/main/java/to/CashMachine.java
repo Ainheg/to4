@@ -29,6 +29,8 @@ public class CashMachine {
         this.card = card;
     }
 
+    public void removeCard() {this.card = null; this.account = null;}
+
     public void typePin(String pin) {
         if (pin.equals(card.getPin())) {
             account = card.getAccount();
